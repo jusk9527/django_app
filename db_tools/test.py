@@ -12,8 +12,8 @@ from db_tools.create_order_test import CreateOrder
 from db_tools.import_address_update_userinfo import AddAdress
 from db_tools.random_delivery import RandomDelivery
 
-if __name__ == "__main__":
-
+# if __name__ == "__main__":
+class Demo():
     #添加类目信息
     cate = AddCate()
     #添加商品信息

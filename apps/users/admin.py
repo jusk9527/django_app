@@ -5,7 +5,7 @@ from .models import UserProfile, VerifyCode
 
 class UserProfileAdmin(admin.ModelAdmin):
     ordering = ["pk"]
-    list_display = ["pk", "username", "birthday", "gender", "mobile", "email", "add_time"]
+    list_display = ["pk", "username", "birthday", "gender", "mobile", "email", "add_time","password"]
     search_fields = ["name", "mobile"]
     list_per_page = 50
 

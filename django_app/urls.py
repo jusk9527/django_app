@@ -26,6 +26,8 @@ from users.views import UserViewset
 from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from trade.views import ShoppingCartViewset, OrderViewset
 
+from users.views import StartDemo
+
 router = DefaultRouter()
 router.register('goods', GoodsListViewSet, basename="goods")
 router.register(r'categories', CategoryViewSet, base_name="categories")
@@ -48,4 +50,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     # jwt的token认证接口
     path('api/login/', obtain_jwt_token),
+
+    path('startdemo/',StartDemo.as_view(),)
 ]

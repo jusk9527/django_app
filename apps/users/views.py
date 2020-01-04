@@ -66,3 +66,42 @@ class UserViewset(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.Upd
 
     def perform_create(self, serializer):
         return serializer.save()
+
+
+
+
+
+from django.contrib import auth
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+
+
+
+
+from users.models import UserProfile
+from rest_framework.views import APIView
+from rest_framework.response import Response
+class StartDemo(APIView):
+    def get(self,request):
+        username = "admin123456"
+        password = "admin123456"
+        try:
+            query_result = User(username=username,password=password, is_active=True,is_staff=True,is_superuser=True)
+
+
+            # 设置密码
+            query_result.set_password(password)
+            query_result.save()
+
+
+            from db_tools.test import Demo
+
+        except:
+            pass
+        return Response("导入数据大概需要十分钟----正在导入数据")
+
+

@@ -88,22 +88,29 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': '',        #数据库名字
+#         'USER': '',          #账号
+#         'PASSWORD': '',    #密码
+# 
+#         'HOST': '45.77.189.214',     #IP
+#         'PORT': '3306',          #端口
+#         #这里引擎用innodb（默认myisam）
+#         #因为后面第三方登录时，要求引擎为INNODB
+#         # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'},    #改为
+#         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"}
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',        #数据库名字
-        'USER': '',          #账号
-        'PASSWORD': '',    #密码
-
-        'HOST': '45.77.189.214',     #IP
-        'PORT': '3306',          #端口
-        #这里引擎用innodb（默认myisam）
-        #因为后面第三方登录时，要求引擎为INNODB
-        # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'},    #改为
-        "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"}
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 
