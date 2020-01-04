@@ -6,12 +6,21 @@
 
 
 >线上演示地址: http://45.77.189.214/admin/
- 
+
+>线上导入数据和创建默认账号地址:http://45.77.189.214/startdemo/
 ```markdown
+自己演示的话直接将ip换成自己ip
+
 一些api接口：http://45.77.189.214/api/
 
-用户名:admin
-密码:admin123
+导入数据和创建账号接口：http://45.77.189.214/startdemo/
+
+导入数据由于sqlite3不能的问题，可能一次只会导入几百条,多试几次就能直接全部导入完成
+
+
+默认点了创建账号的接口
+用户名:admin123456
+密码:admin123456
 ```
 
 
@@ -22,9 +31,8 @@ $ git clone https://github.com/jusk9527/django_app.git
 $ cd django_app
 $ docker-compose up
 ```
-1. 注意已经安装了docker、docker-compose
-2. 注意自己配置setting中数据库
-
+1. 注意已经安装了docker、docker-compose。未安装的[可参考这个](https://www.runoob.com/docker/centos-docker-install.html)
+2. 注意自己配置setting中数据库，这是MYSQL的。生成环境还是MYSQL稳得
 ```
 DATABASES = {
     'default': {
@@ -42,3 +50,6 @@ DATABASES = {
     }
 }
 ```
+3. 由于是演示,故默认用的是sqlite3数据库。所有只是演示的如上Quick Start
+
+
