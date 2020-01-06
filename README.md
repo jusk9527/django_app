@@ -53,3 +53,37 @@ DATABASES = {
 3. 由于是演示,故默认用的是sqlite3数据库。所有只是演示的如上Quick Start
 
 
+4. celery 的一些使用技巧
+
+#####  [django+celery 入门安装](https://github.com/coco369/knowledge/blob/master/celery/1.celery%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/1.%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B.md)
+
+#####  [django配置celery](https://juejin.im/post/5b588b8c6fb9a04f834655a6)
+
+#####  [配置Django中Celery的定时任务与crontab讲解](https://www.jianshu.com/p/2e2a29e14c94)
+
+
+```markdown
+这个是可以做每天或定时时间做定时,配置参数做了比较详细的解释
+```
+
+
+#####  [django进阶之celery](https://segmentfault.com/a/1190000016082551)
+
+
+```
+经典命令
+python manage.py celerybeat -l info
+启动beat
+```
+
+##### [灵活多变的celery](https://github.com/celery)
+
+
+```
+这里有许多celery插件，比如:
+django-celery-beat、这个是定时插件，比较灵活
+
+django-celery-results、这个是执行结果存储,方便看执行结果是成功或者失败
+
+还有许多
+```
