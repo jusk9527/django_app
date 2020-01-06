@@ -85,6 +85,7 @@ User = get_user_model()
 from users.models import UserProfile
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from utils.tasks import add
 class StartDemo(APIView):
     def get(self,request):
         username = "admin123456"
@@ -98,10 +99,14 @@ class StartDemo(APIView):
             query_result.save()
 
 
-            from db_tools.test import Demo
+            # from db_tools.test import Demo
 
         except:
             pass
-        return Response("导入数据大概需要十分钟----正在导入数据")
+
+
+
+        res = add.delay(3,5)
+        return Response("导入数据大概需要十分钟----正在导入数据{0}".format(res))
 
 

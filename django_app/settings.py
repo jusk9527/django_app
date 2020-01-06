@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'extra_apps.DjangoUeditor',
     'django_filters',
+    'djcelery',
 
 ]
 
@@ -97,9 +98,6 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 # 
 #         'HOST': '45.77.189.214',     #IP
 #         'PORT': '3306',          #端口
-#         #这里引擎用innodb（默认myisam）
-#         #因为后面第三方登录时，要求引擎为INNODB
-#         # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'},    #改为
 #         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"}
 #     }
 # }
@@ -188,3 +186,62 @@ JWT_AUTH = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+
+
+# 如下配置celery等信息
+
+import djcelery
+# 当settings.py中的djcelery.setup_loader()运行时,
+# Celery便会查看所有INSTALLED_APPS中app目录中的tasks.py文件, 找到标记为task的function,
+# 并将它们注册为celery task.
+djcelery.setup_loader()     #加载djcelery
+
+#并没有北京时区，与下面TIME_ZONE应该一致
+CELERY_TIMEZONE = 'Asia/Shanghai'
+# 消息队列
+BROKER_URL = 'redis://45.77.189.214:6379'
+# 配置backend
+# CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
+# 设置worker的并发数量为2
+CELERY_CONCURRENCY = 2
+# 结果存储位置
+CELERY_RESULT_BACKEND = 'redis://45.77.189.214:6379'
+# 任务序列化和反序列化为json
+CELERY_TASK_SERIALIZER = 'json'
+# 存储结果序列化为json
+CELERY_RESULT_SERIALIZER = 'json'
+
+
+from celery.schedules import crontab
+from celery.schedules import timedelta
+
+CELERYBEAT_SCHEDULE = {    #定时器策略
+    #定时任务一：　每隔30s运行一次
+    u'测试定时器1': {
+        "task": "apps.utils.tasks.add",
+        #"schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
+        "schedule":timedelta(seconds=666),
+        "args": (3,8),
+    },
+}
+
+
+# CELERY_BEAT_SCHEDULE = {
+#     # 'add-every-xx-seconds': {
+#     #     'task': 'app_blog.blog.tasks.print_info',
+#     #     'schedule': timedelta(seconds=2),  # 每 30 秒一次
+#     #     # 'schedule': timedelta(minutes=1),         # 每 1 分钟一次
+#     #     # 'schedule': timedelta(hours=4),           # 每 4 小时一次
+#     #     'args': ('settings中的定时任务',)  # 任务函数参数，如果只有一个参数，一定要加逗号
+#     # },
+#     'send_qq_blog_request_count': {
+#         'task': 'app_blog.blog.tasks.count_blog_everyday_request',
+#         'schedule': crontab(hour=23, minute=30),  # 每天晚上 23 点 30 分执行一次
+#     }
+# }
+
+#############################
+# celery 配置信息 end
+#############################
