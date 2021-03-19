@@ -17,7 +17,7 @@ django-filter==2.1.0
 django-guardian==1.5.0
 django-ratelimit==1.1.0
 django-simpleui==2.1b5
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 flower==0.9.3
 idna==2.8
